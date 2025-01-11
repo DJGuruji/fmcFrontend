@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: 'https://fmcbackend-hpcs.onrender.com//api',
 });
 
 instance.interceptors.request.use(
@@ -19,3 +19,5 @@ instance.interceptors.request.use(
 );
 
 export default instance;
+
+
