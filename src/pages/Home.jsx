@@ -94,7 +94,8 @@ const Home = () => {
                 </h2>
                 <img
                   className="w-full h-full object-contain md:object-cover md:px-16 lg:px-16 xl:px-16"
-                  src={config.API_URL+`${postImage}`}
+                //  src={config.API_URL+`${postImage}`}
+                src={postImage}
                   alt={postName}
                 />
               </div>

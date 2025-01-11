@@ -99,6 +99,7 @@ const Profile = () => {
           type="file"
           accept="image/*"
           id="fileInput"
+          name="photo"
           onChange={(e) => setPhoto(e.target.files[0])}
           className="hidden"
         />

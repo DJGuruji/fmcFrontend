@@ -297,7 +297,7 @@ const Navbar = () => {
         </div>
         {dropdownOpen && (
           <div className="md:hidden">
-            <div className="w-28 absolute mt-2 rounded-md shadow-lg bg-white right-0 border-2 border-blue-500">
+            <div className="bg-zinc-700 text-white w-28 absolute mt-2 rounded-md shadow-lg bg-white right-0 border-2 border-blue-500">
               <ul className="flex flex-col space-y-2 mt-2 flex-wrap">
                 {!user ? (
                   <>
