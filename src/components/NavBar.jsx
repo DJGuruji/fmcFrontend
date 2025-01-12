@@ -5,6 +5,7 @@ import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 import axios from "../axios";
 import config from "../config";
+import logo from "/fmc.jpeg"
 import {
   AiOutlineUser,
   AiOutlineLogin,
@@ -80,7 +81,8 @@ const Navbar = () => {
                       onClick={toggleSubmenu}
                     />
                   ) : (
-                    <CgProfile
+                    <img
+                    src={logo}
                       className="bg-zinc-300 text-zinc-600  w-11 h-11 rounded-full cursor-pointer"
                       onClick={toggleSubmenu}
                     />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "../axios";
 import { toast } from "react-toastify";
 import config from "../config";
+import { CgProfile } from "react-icons/cg";
 
 const Profile = () => {
   const [userId, setUserId] = useState("");
@@ -15,6 +16,7 @@ const Profile = () => {
   const [office, setOffice] = useState("");
   const [officePlace, setOfficePlace] = useState("");
   const [loading, setLoading] = useState(true);
+  const [loadings, setLoadings] = useState(true);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -47,7 +49,7 @@ const Profile = () => {
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
-
+    setLoadings(true); 
     try {
       const formData = new FormData();
       formData.append("name", name);
@@ -74,13 +76,18 @@ const Profile = () => {
     } catch (error) {
       console.log(error);
       toast.error("Error updating profile:", error);
+    } finally {
+      setLoadings(false); // Step 4: Reset loading state after signup attempt (whether success or error)
     }
   };
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <div className="spinner-border inline-block w-8 h-8 border-4 rounded-full" role="status">
+        <div
+          className="spinner-border inline-block w-8 h-8 border-4 rounded-full"
+          role="status"
+        >
           <span className="visually-hidden">Loading...</span>
         </div>
       </div>
@@ -93,7 +100,9 @@ const Profile = () => {
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
-      <h2 className="text-2xl font-semibold mb-6 text-center">Update Profile</h2>
+      <h2 className="text-2xl font-semibold mb-6 text-center">
+        Update Profile
+      </h2>
       <div className="relative inline-block w-24 h-24">
         <input
           type="file"
@@ -109,12 +118,14 @@ const Profile = () => {
         >
           {photo ? (
             <img
-              src={config.API_URL + `${photo}`}
+              // src={config.API_URL + `${photo}`}
+              src={photo}
               alt="Profile"
               className="object-cover w-full h-full rounded-full"
             />
           ) : (
-            <div className=" w-5 h-2 px-5 text-4xl text-gray-500">+</div>
+            // <div className=" w-5 h-2 px-5 text-4xl text-gray-500">+</div>
+            <CgProfile className="bg-zinc-300 text-zinc-600  w-11 h-11 rounded-full cursor-pointer" />
           )}
         </div>
         <div
@@ -127,7 +138,9 @@ const Profile = () => {
 
       <form onSubmit={handleUpdateProfile} className="space-y-4">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Name:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Name:
+          </label>
           <input
             type="text"
             value={name}
@@ -138,7 +151,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Email:
+          </label>
           <input
             type="email"
             value={email}
@@ -149,7 +164,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Mobile:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Mobile:
+          </label>
           <input
             type="text"
             value={mobile}
@@ -159,7 +176,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">State:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            State:
+          </label>
           <input
             type="text"
             value={state}
@@ -169,7 +188,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Profession:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Profession:
+          </label>
           <input
             type="text"
             value={job}
@@ -179,7 +200,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">District:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            District:
+          </label>
           <input
             type="text"
             value={district}
@@ -189,7 +212,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Office:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Office:
+          </label>
           <input
             type="text"
             value={office}
@@ -199,7 +224,9 @@ const Profile = () => {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700">Office Place:</label>
+          <label className="block text-sm font-medium text-gray-700">
+            Office Place:
+          </label>
           <input
             type="text"
             value={officePlace}
@@ -208,11 +235,12 @@ const Profile = () => {
             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
           />
         </div>
+
         <button
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
         >
-          Update Profile
+          {loadings ? "Updating ..." : "Update "}
         </button>
       </form>
     </div>

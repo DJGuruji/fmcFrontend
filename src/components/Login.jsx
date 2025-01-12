@@ -14,6 +14,7 @@ const Login = () => {
 
   const { identifier, password } = formData; // Changed from email to identifier
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); 
   const { login } = useAuthStore();
 
   const onChange = (e) => {
@@ -22,13 +23,16 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true); 
     try {
       const res = await axios.post('/auth/login', formData); // Sending identifier instead of email
       login(res.data);
       navigate('/');
     } catch (error) {
       toast.error(error.response?.data?.message || 'An error occurred');
+    }
+    finally {
+      setLoading(false); // Step 4: Reset loading state after signup attempt (whether success or error)
     }
   };
 
@@ -66,7 +70,9 @@ const Login = () => {
             />
           </div>
         </div>
-        <button type="submit" className="font-bold border-2 border-blue-800 w-full bg-blue-300 text-blue-800 py-2 rounded-md hover:bg-blue-400 transition duration-200">Login</button>
+        <button type="submit" className="w-full bg-blue-300 font-bold text-blue-800 border-2 border-blue-800 py-2 rounded-md hover:bg-blue-400 transition duration-200">
+          {loading ? 'Loging in...' : 'Login'}
+        </button>
         <p className="pt-5">
           <Link to="/forgotpass" className='text-blue-600 hover:text-blue-400 underline '>Forgot Password ?</Link>
         </p>

@@ -6,7 +6,7 @@ import { useAuthStore } from "../store/authStore";
 import { getPosts } from "../services/PostService";
 import config from "../config";
 import Modal from "react-modal";
-
+import { CgProfile } from "react-icons/cg";
 
 Modal.setAppElement("#root");
 
@@ -32,7 +32,6 @@ const UserProfileShow = () => {
   const [followersCount, setFollowersCount] = useState(0);
   const [followingCount, setFollowingCount] = useState(0);
 
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -41,9 +40,9 @@ const UserProfileShow = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        
+
         const userData = response.data;
-        console.log(userData)
+        console.log(userData);
         setName(userData.name);
         setEmail(userData.email);
         setMobile(userData.mobile || "");
@@ -158,22 +157,22 @@ const UserProfileShow = () => {
     }
   };
 
-  
-
- 
-
   return (
     <div className="flex justify-center items-center">
       <div className="md:w-3/4 lg:w-3/4 xl:w-3/4 mx-auto p-6 bg-white rounded-lg ">
         <div className="text-center">
           {photo && (
             <>
+              ({" "}
               <img
                 src={config.API_URL + `${photo}`}
                 alt="Profile"
                 className="mx-auto w-24 h-24 rounded-full object-cover mb-4 cursor-pointer"
                 onClick={openModal}
               />
+              ):(
+              <CgProfile className="bg-zinc-300 text-zinc-600  w-11 h-11 rounded-full cursor-pointer" />
+              )
               <Modal
                 isOpen={isModalOpen}
                 onRequestClose={closeModal}
@@ -195,12 +194,18 @@ const UserProfileShow = () => {
           <h2 className="text-3xl font-semibold mb-2 ">{name}</h2>
           <p className="text-gray-600 ">{job}</p>
           <div className="flex justify-center p-3">
-          <Link to={`/following/${userId}`}  className="cursor-pointer text-blue-500">
-            {followingCount} Following
-          </Link>
-          <Link to={`/followers/${userId}`} className="ml-5 cursor-pointer text-blue-500">
-            {followersCount} Followers
-          </Link>
+            <Link
+              to={`/following/${userId}`}
+              className="cursor-pointer text-blue-500"
+            >
+              {followingCount} Following
+            </Link>
+            <Link
+              to={`/followers/${userId}`}
+              className="ml-5 cursor-pointer text-blue-500"
+            >
+              {followersCount} Followers
+            </Link>
           </div>
           {user &&
             user.email !== email &&
@@ -219,7 +224,6 @@ const UserProfileShow = () => {
                 Following
               </button>
             ))}
-          
         </div>
         {/* grid grid-cols-1 md:grid-cols-2 gap-4 */}
         <div className=" md:flex lg:flex xl:flex  justify-center ">
@@ -253,27 +257,27 @@ const UserProfileShow = () => {
             </p>
           </div>
         </div>
-   <div className="flex justify-center flex-wrap">
-   {user && user.email === email && (
-          <>
-            <button className="hover:shadow-xl bg-blue-700 hover:bg-blue-800 text-white py-1 px-2 rounded-md hover:rounded-xl mt-5">
-              <Link to="/profile">Update profile</Link>
-            </button>
-            <button
-              className="hover:shadow-xl ml-3 bg-blue-700 hover:bg-blue-800 text-white py-1 px-2 rounded-md hover:rounded-xl mt-5"
-              onClick={deleteProfilePhoto}
-            >
-              Remove Profile Picture
-            </button>
-          </>
-        )}
-        <button
-          onClick={fetchUserPosts}
-          className="hover:shadow-xl py-1 px-6 rounded-md hover:rounded-xl mt-5 ml-3 bg-blue-700 hover:bg-blue-800 text-white"
-        >
-          Posts
-        </button>
-   </div>
+        <div className="flex justify-center flex-wrap">
+          {user && user.email === email && (
+            <>
+              <button className="hover:shadow-xl bg-blue-700 hover:bg-blue-800 text-white py-1 px-2 rounded-md hover:rounded-xl mt-5">
+                <Link to="/profile">Update profile</Link>
+              </button>
+              <button
+                className="hover:shadow-xl ml-3 bg-blue-700 hover:bg-blue-800 text-white py-1 px-2 rounded-md hover:rounded-xl mt-5"
+                onClick={deleteProfilePhoto}
+              >
+                Remove Profile Picture
+              </button>
+            </>
+          )}
+          <button
+            onClick={fetchUserPosts}
+            className="hover:shadow-xl py-1 px-6 rounded-md hover:rounded-xl mt-5 ml-3 bg-blue-700 hover:bg-blue-800 text-white"
+          >
+            Posts
+          </button>
+        </div>
         {loadingPosts ? (
           <p className="text-center mt-4">Loading posts...</p>
         ) : showPosts && posts.length === 0 ? (
@@ -283,7 +287,9 @@ const UserProfileShow = () => {
             <div className="space-y-4">
               {posts.map((post) => (
                 <div key={post._id} className="md:p-4 lg:p-4 xl:p-4 rounded-md">
-                  <h4 className="text-xl font-semibold ml-16 p-5">{post.postName}</h4>
+                  <h4 className="text-xl font-semibold ml-16 p-5">
+                    {post.postName}
+                  </h4>
                   <div className="md:flex lg:flex xl:flex">
                     <img
                       className="w-full h-full object-contain md:object-cover md:px-16 lg:px-16 xl:px-16"
@@ -310,7 +316,6 @@ const UserProfileShow = () => {
           </div>
         ) : null}
       </div>
-
     </div>
   );
 };
