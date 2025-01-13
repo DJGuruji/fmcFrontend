@@ -380,7 +380,7 @@ const Navbar = () => {
                             to="/videoposts"
                             className={({ isActive }) =>
                               isActive
-                                ? "flex items-center bg-zinc-300 p-2 rounded-xl underline"
+                                ? "flex items-center hover:bg-zinc-600 p-2 rounded-xl underline"
                                 : "flex items-center hover:bg-zinc-600 rounded-xl"
                             }
                             onClick={closeDropdown}
@@ -433,7 +433,7 @@ const Navbar = () => {
                     )}
                     <li className="text-lg">
                       <NavLink
-                        to="/addwork"
+                        to="/ai"
                         className={({ isActive }) =>
                           isActive
                             ? "flex items-center hover:bg-zinc-600 rounded-xl underline"
