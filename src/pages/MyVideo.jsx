@@ -51,6 +51,19 @@ const MyVideo = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div
+          className="w-8 h-8 border-4 border-blue-800 border-t-transparent rounded-full animate-spin"
+          role="status"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">My Video Posts</h1>

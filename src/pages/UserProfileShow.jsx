@@ -157,6 +157,20 @@ const UserProfileShow = () => {
     }
   };
 
+
+  if (loadingPosts) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div
+          className="w-8 h-8 border-4 border-blue-800 border-t-transparent rounded-full animate-spin"
+          role="status"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex justify-center items-center">
       <div className="md:w-3/4 lg:w-3/4 xl:w-3/4 mx-auto p-6 bg-white rounded-lg ">
@@ -293,7 +307,7 @@ const UserProfileShow = () => {
                   <div className="md:flex lg:flex xl:flex">
                     <img
                       className="w-full h-full object-contain md:object-cover md:px-16 lg:px-16 xl:px-16"
-                      src={`http://localhost:5000/${post.postImage}`}
+                      src={post.postImage}
                       alt={post.postName}
                     />
                     <div className="p-4">
