@@ -113,9 +113,9 @@ const Navbar = () => {
                       View Profile
                     </NavLink>
                   </li>
-              
-            
-        
+               
+               
+      
                   <li className="p-2">
                     <NavLink
                       to="/settings"
@@ -173,10 +173,10 @@ const Navbar = () => {
             <>
               {(user.role === "user" ||
                 user.role === "admin" ||
-                user.role === "staff") && (
+                user.role === "staff" ) && (
                 <>
                   <li className="list-none text-zinc-700 dark:text-gray-200 self-center font-sans">
-                   
+                    Welcome 
                     {user.name}
                   </li>
                   <li className="list-none  self-center">
