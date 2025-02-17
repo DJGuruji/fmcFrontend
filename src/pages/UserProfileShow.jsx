@@ -290,11 +290,11 @@ const UserProfileShow = () => {
               </button>
             </>
           )}
-          {user &&  user.email !== email && (
+          {/* {user &&  user.email !== email && (
             <button className="hover:shadow-xl bg-blue-700 hover:bg-blue-800 text-white py-1 px-2 rounded-md hover:rounded-xl mt-5">
               <Link to={`/book/${userId}`}>Book an Appointment</Link>
             </button>
-          )}
+          )} */}
  {user &&
             user.email !== email &&(
           <button

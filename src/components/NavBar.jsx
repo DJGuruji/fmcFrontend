@@ -70,7 +70,8 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="bg-white dark:bg-gray-900 dark:text-white p-3 backdrop-blur-md border-b-2 border-blue-600 sticky top-0">
+<nav className="bg-white dark:bg-gray-900 dark:text-white p-3 backdrop-blur-md border-b-2 border-blue-600 sticky top-0 z-50">
+
       <div className="flex justify-between items-center">
         {/* Left Section */}
         <div className="flex items-center">
@@ -290,8 +291,8 @@ const Navbar = () => {
 
       {/* Mobile Dropdown Menu */}
       {dropdownOpen && (
-        <div className="md:hidden">
-          <div className="w-32 bg-white dark:bg-gray-900  absolute mt-2 rounded-md shadow-lg text-black dark:text-white right-0 border-2 border-blue-500">
+        <div className="md:hidden ">
+          <div className="w-32 z-50 bg-white dark:bg-gray-900  absolute mt-2 rounded-md shadow-lg text-black dark:text-white right-0 border-2 border-blue-500">
             <ul className="flex flex-col space-y-2 mt-2 flex-wrap">
               {!user ? (
                 <>
