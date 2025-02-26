@@ -161,12 +161,22 @@ const Users = () => {
             <tbody>
               {filteredUsers.map((user) => (
                 <tr key={user._id} className="border-t">
-                  <td className="px-4 py-2">
+                 <td className="px-4 py-2">
                     <Link
                       to={`/profile/${user._id}`}
                       className="text-blue-600 dark:text-blue-300 hover:underline"
                     >
-                      { user.name}
+                    
+                    <span className="flex flex-col  items-center">
+                    {user.photo?   <img
+                        src={user.photo}
+                        alt=""
+                        className="mx-auto w-12 h-12 rounded-full object-cover mb-4 cursor-pointer"
+                      
+                      /> : ""}
+                      {user.name}
+                    </span>
+                 
                     </Link>
                   </td>
                   <td className="px-4 py-2">{user.role}</td>
