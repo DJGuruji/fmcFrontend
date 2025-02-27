@@ -28,6 +28,7 @@ const UserProfileShow = () => {
   const [showPosts, setShowPosts] = useState(false);
   const [showMore, setShowMore] = useState({});
   const [loadingPosts, setLoadingPosts] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
   const [followersCount, setFollowersCount] = useState(0);
@@ -35,7 +36,9 @@ const UserProfileShow = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      setLoading(true);
       try {
+     
         const response = await axios.get(`admin/profile/${userId}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -59,6 +62,8 @@ const UserProfileShow = () => {
         setFollowingCount(userData.following.length);
       } catch (error) {
         toast.error(`Error fetching user profile: ${error.message}`);
+      }finally{
+        setLoading(false);
       }
     };
 
@@ -158,6 +163,20 @@ const UserProfileShow = () => {
       toast.error("Error Unfollowing");
     }
   };
+
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen dark:bg-slate-900">
+        <div
+          className="w-8 h-8 border-4 border-blue-800 border-t-transparent rounded-full animate-spin"
+          role="status"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   if (loadingPosts) {
     return (
